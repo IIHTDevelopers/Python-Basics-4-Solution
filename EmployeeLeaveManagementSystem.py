@@ -1,70 +1,44 @@
-# student/employee_leave_management.py
+import pandas as pd
 
-# Function 1: Get Employee Data
-def get_employee_data():
-    """
-    Returns the employee data with leave balances.
+# ✅ Initial employee leave data
+employee_ids = [101, 102, 103, 104]
+employee_names = ["Alice", "Bob", "Charlie", "Diana"]
+leaves_taken = [5, 2, 8, 1]
 
-    Returns:
-        dict: Employee details including name and leave balance.
-    """
-    return {
-        "E001": {"name": "John Doe", "leave_balance": 12},
-        "E002": {"name": "Alice Smith", "leave_balance": 10},
-        "E003": {"name": "Bob Johnson", "leave_balance": 8},
-        "E004": {"name": "Emma Davis", "leave_balance": 15},
-        "E005": {"name": "Michael Brown", "leave_balance": 5},
-    }
-
-# Function 2: Process Leave Requests
-def process_leave_requests(employees, leave_requests):
-    """
-    Processes leave requests and updates employee leave balances.
-
-    Args:
-        employees (dict): Employee data with leave balances.
-        leave_requests (list): List of tuples containing employee ID and requested leave days.
-
-    Returns:
-        list: Leave request summary messages.
-    """
-    leave_summary = []
-    for emp_id, leave_days in leave_requests:
-        if emp_id not in employees:
-            leave_summary.append(f"Employee ID {emp_id} not found.")
-        elif leave_days < 0:
-            leave_summary.append(f"Invalid leave request for {employees[emp_id]['name']}. Negative days not allowed.")
-        elif employees[emp_id]["leave_balance"] >= leave_days:
-            employees[emp_id]["leave_balance"] -= leave_days
-            leave_summary.append(
-                f"{employees[emp_id]['name']} granted {leave_days} days leave. Remaining: {employees[emp_id]['leave_balance']} days"
-            )
-        else:
-            leave_summary.append(f"{employees[emp_id]['name']} leave request denied. Insufficient balance.")
-    return leave_summary
-
-# Main Execution
-def main():
-    """
-    Main function to handle leave management operations.
-    """
-    employees = get_employee_data()
-    leave_requests = [
-        ("E001", 3),
-        ("E003", 2),
-        ("E005", 4),
-        ("E002", 1),
-        ("E004", 5),
-        ("E999", 3),
-        ("E003", -2)
-    ]
-
-    leave_summary = process_leave_requests(employees, leave_requests)
-
-    print("\n--- Leave Management Summary ---")
-    for status in leave_summary:
-        print(status)
+# Creating the DataFrame
+leave_df = pd.DataFrame({
+    "Employee ID": employee_ids,
+    "Name": employee_names,
+    "Leaves Taken": leaves_taken
+})
 
 
+# TODO: Function 1 - Calculate the total number of leaves taken
+def total_leaves_taken(df):
+    # Return total sum of "Leaves Taken"
+    pass
+
+
+# TODO: Function 2 - Get employees with leaves greater than a given limit
+def employees_exceeding_leaves(df, limit=5):
+    # Return DataFrame rows where "Leaves Taken" > limit
+    pass
+
+
+# TODO: Function 3 - Calculate the average number of leaves taken
+def average_leaves_taken(df):
+    # Return average of "Leaves Taken"
+    pass
+
+
+# Optional: Sample testing block
 if __name__ == "__main__":
-    main()
+    # TODO: Print total leaves taken
+    print("Total Leaves Taken:", total_leaves_taken(leave_df))
+
+    # TODO: Print employees with excessive leave
+    print("\nEmployees with Leaves > 5:")
+    print(employees_exceeding_leaves(leave_df, limit=5))
+
+    # TODO: Print average leaves taken
+    print("\nAverage Leaves Taken:", average_leaves_taken(leave_df))
