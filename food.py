@@ -1,4 +1,3 @@
-# TODO: Function to read food items from a file
 def read_food_items(file_path):
     """
     Reads food items and their type (Veg/Non-Veg) from a file.
@@ -15,15 +14,18 @@ def read_food_items(file_path):
     Returns:
         list of tuples: [(item_name, item_type), ...]
     """
-    # Initialize list
-    # TODO: Open file and read lines
-    # TODO: Split each line into item and type
-    # TODO: Append valid entries as tuple
-    # TODO: Handle file not found error
-    pass
+    food_items = []
+    try:
+        with open(file_path, "r", encoding="utf-8") as file:
+            for line in file:
+                parts = line.strip().split(",")
+                if len(parts) == 2:
+                    item, type_ = parts[0].strip(), parts[1].strip()
+                    food_items.append((item, type_))
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+    return food_items
 
-
-# TODO: Function to classify food items
 def classify_food_items(food_items):
     """
     Classifies food items into Veg and Non-Veg lists.
@@ -34,17 +36,20 @@ def classify_food_items(food_items):
     Returns:
         dict: {'Veg': [...], 'Non-Veg': [...]}
     """
-    # TODO: Initialize classification dict
-    # TODO: Iterate and sort items into correct list
-    pass
-
+    classification = {'Veg': [], 'Non-Veg': []}
+    for item, type_ in food_items:
+        if type_ == 'Veg':
+            classification['Veg'].append(item)
+        elif type_ == 'Non-Veg':
+            classification['Non-Veg'].append(item)
+    return classification
 
 # ✅ Main Execution
 if __name__ == "__main__":
-    file_path = "food_items.txt"  # TODO: Ensure the file exists with proper format
+    file_path = "food_items.txt"
     items = read_food_items(file_path)
     result = classify_food_items(items)
 
     print("\n--- Food Classification ---")
-    print("Veg Items:", result.get('Veg'))
-    print("Non-Veg Items:", result.get('Non-Veg'))
+    print("Veg Items:", result['Veg'])
+    print("Non-Veg Items:", result['Non-Veg'])
