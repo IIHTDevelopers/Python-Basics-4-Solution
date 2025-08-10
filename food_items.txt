@@ -1,5 +1,8 @@
 Pizza,Veg
 Chicken Wings,Non-Veg
-Pasta Veg
+Pasta,Veg
 Fish Fry,Non-Veg
+Noodles,Veg
+lamb,Non-Veg
+
 
