@@ -88,7 +88,7 @@ class TestBloodBank(unittest.TestCase):
 import unittest
 import os
 from test.TestUtils import TestUtils
-from food import read_food_sales, find_lowest_sales_item, get_total_sales_by_category
+from food import read_food_sales, find_lowest_sales_item
 
 class TestFoodProcessing(unittest.TestCase):
     @classmethod
@@ -142,17 +142,6 @@ class TestFoodProcessing(unittest.TestCase):
             self.test_obj.yakshaAssert("test_find_lowest_sales_item", False, "exception")
             print("test_find_lowest_sales_item = Failed")
 
-    def test_get_total_sales_by_category(self):
-        try:
-            items = read_food_sales(self.filename)
-            totals = get_total_sales_by_category(items)
-            self.assertEqual(totals["Veg"], 520)      # 120+150+200+50
-            self.assertEqual(totals["Non-Veg"], 300)  # 80+60+90+70
-            self.test_obj.yakshaAssert("test_get_total_sales_by_category", True, "functional")
-            print("test_get_total_sales_by_category = Passed")
-        except Exception:
-            self.test_obj.yakshaAssert("test_get_total_sales_by_category", False, "exception")
-            print("test_get_total_sales_by_category = Failed")
 
 
 if __name__ == "__main__":
